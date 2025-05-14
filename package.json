@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "boxicons": "^2.1.4",
+    "browser-sync": "^3.0.4",
+    "deepmerge": "^4.3.1",
+    "del": "^6.1.1",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-dart-sass": "^1.1.0",
+    "gulp-environment": "^1.5.2",
+    "gulp-exec": "^5.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "katex": "^0.16.22",
+    "merge-stream": "^2.0.0",
+    "webpack": "^5.99.8"
+  }
+}
