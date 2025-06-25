@@ -1,16 +1,30 @@
-using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sih3.Data;
 using Sih3.Models;
+using Sih3.Models.Customs;
+using Sih3.Interfaces;
+using Serilog;
+using RestSharp;
+using RestSharp.Authenticators;
+using System.Net;
+using System.Diagnostics;
+// using Sih3.Helpers;
+// using Sih3.Models.Datatables;
 
 namespace Sih3.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IUnitOfWorkRepository _unitOfWorkRepository;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IUnitOfWorkRepository unitOfWorkRepository)
     {
         _logger = logger;
+        _unitOfWorkRepository = unitOfWorkRepository;
     }
 
     public IActionResult Index()
@@ -21,6 +35,21 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+
+    public async Task<JsonResult> GetAwlrLastReading()
+    {
+        var result = new HttpResult();
+        var getResult = await _unitOfWorkRepository.Readings.GetAwlrLastReadingAsync();
+
+        result.metaData = new MetaData
+        {
+            code = 200,
+            message = "OK"
+        };
+
+        result.response = getResult;
+        return Json(result);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

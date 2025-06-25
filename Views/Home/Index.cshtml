@@ -3,6 +3,10 @@
 }
 
 @section Styles {
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <style>
         html, body {
             margin: 0;
@@ -25,7 +29,7 @@
             position: absolute;
             top: 100px;
             left: 20px;
-            width: 325px;
+            width: 400px;
             height: 80vh;
             background-color: #f8f9fa;
             padding: 20px;
@@ -75,14 +79,14 @@
         }
 
         #sidebar-kiri.minimized {
-            transform: translateX(-340px);
+            transform: translateX(-370px);
         }
 
         /* Tombol toggle */
         #toggleBtn-kiri {
             position: absolute;
             top: 400px;
-            left: 343px;
+            left: 418px;
             width: 35px;
             height: 50px;
             background-color: white;
@@ -156,12 +160,136 @@
         #toggleBtn-legenda i {
             font-size: 14px;
         }
+
+        .reading-at {
+            font-size: 10px;
+        }
+
+        .text-station-name {
+            font-size: 12px;
+        }
+
+        .bg-siaga1 {
+            background-color: #EF5350;
+        }
+
+        .bg-siaga2 {
+            background-color: rgba(242,131,35);
+        }
+
+        .bg-siaga3 {
+            background-color: rgba(247,184,75);
+        }
+
+        .bg-normal {
+            background-color: rgba(26,188,156);
+        }
+
+        .bg-nostatus {
+            background-color: rgba(204, 204, 204);
+        }
+
+        /* progress meter */
+        .progress-meter {
+            min-height: 6px;
+        }
+
+        .progress-meter > .meter {
+            position: relative;
+            float: left;
+            min-height: 6px;
+            border-width: 0px;
+            border-style: solid;
+            border-color: rgb(160, 160, 160);
+        }
+
+        .progress-meter > .meter:hover {
+            cursor: pointer;
+        }
+
+        .progress-meter > .meter-normal {
+            background-color: #4DC27E;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .progress-meter > .meter-waspada {
+            background-color: #FFDA4F;
+        }
+
+        .progress-meter > .meter-siaga {
+            background-color: #FFA600;
+        }
+
+        .progress-meter > .meter-awas {
+            background-color: #EF5350;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .progress-meter > .meter-left {
+            border-left-width: 1px;
+        }
+
+        .progress-meter > .meter > .meter-text {
+            position: absolute;
+            display: inline-block;
+            bottom: -18px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.65em;
+            color: rgb(160, 160, 160);
+            text-align: left;
+        }
     </style>
 }
 
 <div id="sidebar-kiri">
-    <h4 style="color:#888;">Data Pengamatan H3</h4>
-    <p style="color:#aaa;">Konten sidebar di sini</p>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <!-- Accordion Hidrologi -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hidrologi-body" aria-expanded="false" aria-controls="hidrologi-body">
+                    <i class="fa-solid fa-tint me-2"></i> Hidrologi
+                </button>
+            </h2>
+            <div id="hidrologi-body" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body px-0">
+                    <!-- Nested Accordion: AWLR -->
+                    <div class="accordion accordion-flush" id="accordion-awlr">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="nested-heading-awlr">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#awlr-body" aria-expanded="false" aria-controls="awlr-body">
+                                    <i class="fa-solid fa-water me-2"></i> AWLR
+                                </button>
+                            </h2>
+                            <div id="awlr-body" class="accordion-collapse collapse" aria-labelledby="nested-heading-awlr" data-bs-parent="#accordion-awlr">
+                                <div class="accordion-body">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tambahkan item lainnya di sini jika ada -->
+                    </div>
+                    <div class="accordion accordion-flush" id="accordion-arr">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="nested-heading-awlr">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#arr-body" aria-expanded="false" aria-controls="awlr-body">
+                                    <i class="fa-solid fa-water me-2"></i> ARR
+                                </button>
+                            </h2>
+                            <div id="arr-body" class="accordion-collapse collapse" aria-labelledby="nested-heading-awlr" data-bs-parent="#accordion-arr">
+                                <div class="accordion-body">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tambahkan item lainnya di sini jika ada -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Tombol toggle -->
@@ -170,8 +298,57 @@
 </button>
 
 <div id="sidebar-kanan">
-    <h4 style="color:#888;">List Sensor Offline</h4>
-    <p style="color:#aaa;">Konten sidebar di sini</p>
+    @* <div class="accordion" id="accordionParent">
+        <!-- Kartu Utama: Hidrologi -->
+        <div class="card">
+            <div class="card-header bg-info" id="headingMain">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="false" aria-controls="collapseMain">
+                        <i class="fa-solid fa-tint me-2"></i> Hidrologi
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseMain" class="accordion-collapse collapse show" aria-labelledby="headingMain">
+                <div class="card-body">
+                    <!-- Nested Accordion: Di dalam Hidrologi -->
+                    <div class="accordion" id="accordionNested">
+                        <!-- Nested Card 1: AWLR -->
+                        <div class="card">
+                            <div class="card-header" id="nestedHeadingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseOne" aria-expanded="false" aria-controls="nestedCollapseOne">
+                                        <i class="fa-solid fa-water me-2"></i> AWLR
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="nestedCollapseOne" class="accordion-collapse collapse" aria-labelledby="nestedHeadingOne" data-bs-parent="#accordionNested">
+                                <div class="card-body">
+                                    Isi konten AWLR di sini, misalnya list station atau grafik.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nested Card 2: Curah Hujan -->
+                        <div class="card">
+                            <div class="card-header" id="nestedHeadingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseTwo" aria-expanded="false" aria-controls="nestedCollapseTwo">
+                                        <i class="fa-solid fa-cloud-rain me-2"></i> Curah Hujan
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="nestedCollapseTwo" class="accordion-collapse collapse" aria-labelledby="nestedHeadingTwo" data-bs-parent="#accordionNested">
+                                <div class="card-body">
+                                    Konten untuk Curah Hujan bisa diletakkan di sini.
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of Nested Accordion -->
+                </div>
+            </div>
+        </div>
+    </div> *@
 </div>
 
 <button id="toggleBtn-kanan" title="Minimize">
