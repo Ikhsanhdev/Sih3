@@ -3,10 +3,8 @@
 }
 
 @section Styles {
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link href="~/lib/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
     <style>
         html, body {
             margin: 0;
@@ -241,64 +239,25 @@
             color: rgb(160, 160, 160);
             text-align: left;
         }
+
+        .gm-style .gm-style-iw-d {
+            color: black !important;
+            font-size: 14px;
+            z-index: 9999;
+        }
+
+        .white-popup {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
     </style>
 }
 
 <div id="sidebar-kiri">
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-        <!-- Accordion Hidrologi -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hidrologi-body" aria-expanded="false" aria-controls="hidrologi-body">
-                    <i class="fa-solid fa-tint me-2"></i> Hidrologi
-                </button>
-            </h2>
-            <div id="hidrologi-body" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body px-0">
-                    <!-- Nested Accordion: AWLR -->
-                    <div class="accordion accordion-flush" id="accordion-awlr">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="nested-heading-awlr">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#awlr-body" aria-expanded="false" aria-controls="awlr-body">
-                                    <i class="fa-solid fa-water me-2"></i> AWLR
-                                </button>
-                            </h2>
-                            <div id="awlr-body" class="accordion-collapse collapse" aria-labelledby="nested-heading-awlr" data-bs-parent="#accordion-awlr">
-                                <div class="accordion-body">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tambahkan item lainnya di sini jika ada -->
-                    </div>
-                    <div class="accordion accordion-flush" id="accordion-arr">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="nested-heading-awlr">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#arr-body" aria-expanded="false" aria-controls="awlr-body">
-                                    <i class="fa-solid fa-water me-2"></i> ARR
-                                </button>
-                            </h2>
-                            <div id="arr-body" class="accordion-collapse collapse" aria-labelledby="nested-heading-awlr" data-bs-parent="#accordion-arr">
-                                <div class="accordion-body">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tambahkan item lainnya di sini jika ada -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Tombol toggle -->
-<button id="toggleBtn-kiri" title="Minimize">
-    <i id="toggleIcon-kiri" class="bi bi-chevron-left"></i>
-</button>
-
-<div id="sidebar-kanan">
-    @* <div class="accordion" id="accordionParent">
+    <div class="accordion" id="accordionParent">
         <!-- Kartu Utama: Hidrologi -->
         <div class="card">
             <div class="card-header bg-info" id="headingMain">
@@ -313,42 +272,57 @@
                 <div class="card-body">
                     <!-- Nested Accordion: Di dalam Hidrologi -->
                     <div class="accordion" id="accordionNested">
-                        <!-- Nested Card 1: AWLR -->
-                        <div class="card">
-                            <div class="card-header" id="nestedHeadingOne">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseOne" aria-expanded="false" aria-controls="nestedCollapseOne">
-                                        <i class="fa-solid fa-water me-2"></i> AWLR
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="nestedCollapseOne" class="accordion-collapse collapse" aria-labelledby="nestedHeadingOne" data-bs-parent="#accordionNested">
-                                <div class="card-body">
-                                    Isi konten AWLR di sini, misalnya list station atau grafik.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Nested Card 2: Curah Hujan -->
                         <div class="card">
                             <div class="card-header" id="nestedHeadingTwo">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#nestedCollapseTwo" aria-expanded="false" aria-controls="nestedCollapseTwo">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-arr" aria-expanded="false" aria-controls="nestedCollapseTwo">
                                         <i class="fa-solid fa-cloud-rain me-2"></i> Curah Hujan
                                     </button>
                                 </h2>
                             </div>
-                            <div id="nestedCollapseTwo" class="accordion-collapse collapse" aria-labelledby="nestedHeadingTwo" data-bs-parent="#accordionNested">
-                                <div class="card-body">
-                                    Konten untuk Curah Hujan bisa diletakkan di sini.
-                                </div>
+                            <div id="body-arr" class="accordion-collapse collapse" aria-labelledby="nestedHeadingTwo" data-bs-parent="#accordionNested">
+                                <div class="card-body" id="arr-body"></div>
+                            </div>
+                        </div>
+                        <!-- Nested Card 1: AWLR -->
+                        <div class="card">
+                            <div class="card-header" id="nestedHeadingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr" aria-expanded="false" aria-controls="nestedCollapseOne">
+                                        <i class="fa-solid fa-water me-2"></i> AWLR
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="body-awlr" class="accordion-collapse collapse" aria-labelledby="nestedHeadingOne" data-bs-parent="#accordionNested">
+                                <div class="card-body" id="awlr-body"></div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="nestedHeadingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr-arr" aria-expanded="false" aria-controls="nestedCollapseOne">
+                                        <i class="fa-solid fa-water me-2"></i> AWLR & ARR
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="body-awlr-arr" class="accordion-collapse collapse" aria-labelledby="nestedHeadingOne" data-bs-parent="#accordionNested">
+                                <div class="card-body" id="awlr-arr-body"></div>
                             </div>
                         </div>
                     </div> <!-- End of Nested Accordion -->
                 </div>
             </div>
         </div>
-    </div> *@
+    </div>
+</div>
+
+<!-- Tombol toggle -->
+<button id="toggleBtn-kiri" title="Minimize">
+    <i id="toggleIcon-kiri" class="bi bi-chevron-left"></i>
+</button>
+
+<div id="sidebar-kanan">
 </div>
 
 <button id="toggleBtn-kanan" title="Minimize">
@@ -364,12 +338,16 @@
     <i id="toggleIcon-legenda" class="bi bi-chevron-right"></i>
 </button>
 
-<div id="map"></div>
+<div id="map"></div>x
 
 @section Scripts {
     <script src="~/js/pages/Home/Home.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4jqcen5Xqrgck4V73aL6VepyKp2_wK1U&callback=initMap" async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="~/lib/moment/min/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js"></script>
+    <script src="~/lib/magnific-popup/jquery.magnific-popup.min.js"></script>
+
     <script>
         const sidebarKiri = document.getElementById('sidebar-kiri');
         const toggleBtnKiri = document.getElementById('toggleBtn-kiri');

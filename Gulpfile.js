@@ -20,6 +20,8 @@ conf.distPath = path.resolve(__dirname, conf.distPath).replace(/\\/g, '/');
 const { src, dest, parallel, series, watch } = require('gulp');
 const cached = require('gulp-cached');
 const minify = require('gulp-minify');
+const babel = require('gulp-babel');
+const terser = require('gulp-terser');
 const webpack = require('webpack');
 const sass = require('gulp-dart-sass');
 const localSass = require('sass');
@@ -148,13 +150,30 @@ const pageJsTask = function () {
     .pipe(dest(conf.distPath + `/js`));
 };
 
+// const compileJs = function () {
+//   const baseAssets = 'src/js/pages';
+//   const out = 'wwwroot/js/pages';
+
+//   return src([baseAssets + '/**/*.js'])
+//     .pipe(cached('js'))
+//     .pipe(minify({ noSource: true, ext: { min: '.min.js' } }))
+//     .pipe(dest(out));
+// };
+
 const compileJs = function () {
   const baseAssets = 'src/js/pages';
   const out = 'wwwroot/js/pages';
 
   return src([baseAssets + '/**/*.js'])
     .pipe(cached('js'))
+    .pipe(babel({
+      presets: ['@babel/preset-env']
+    }))
     .pipe(minify({ noSource: true, ext: { min: '.min.js' } }))
+    .on('error', function (err) {
+      console.error('Minify error:', err.toString());
+      this.emit('end');
+    })
     .pipe(dest(out));
 };
 
