@@ -187,6 +187,10 @@ h6 {
   color: var(--contrast-color);
 } */
 
+.text-accordion {
+  color: var(--contrast-color);
+}
+
 .header .logo-text h1,
 .header .logo-text h2,
 .header .logo-text h3 {

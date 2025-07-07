@@ -48,6 +48,59 @@ function initMap() {
         ]
     });
 
+    function loadDAS(url, color) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                data.features.forEach(f => {
+                    if (!f.properties) f.properties = {};
+                    f.properties.fillColor = color;
+                });
+
+                map.data.addGeoJson(data);
+
+                // map.data.forEach(feature => {
+                //     if (!feature.getProperty('source')) {
+                //         feature.setProperty('source', url);
+                //     }
+                // });
+
+                // // Set style khusus untuk fitur dari file ini
+                // map.data.setStyle(function (feature) {
+                //     if (feature.getProperty('source') === url) {
+                //         return {
+                //             fillColor: color,
+                //             fillOpacity: 0.4,
+                //             strokeColor: 'white',
+                //             strokeWeight: 1
+                //         };
+                //     }
+                // });
+            });
+    }
+
+    loadDAS('/data/das_kapuas.json', 'green');
+    loadDAS('/data/das_ws_pawan.json', '#ffc829');
+    loadDAS('/data/das_ws_sambas.json', 'red');
+
+    map.data.setStyle(function(feature) {
+        const fillColor = feature.getProperty('fillColor') || 'gray';
+        return {
+            fillColor: fillColor,
+            fillOpacity: 0.3,
+            strokeColor: 'white',
+            strokeWeight: 0.7
+        };
+    });
+
+    map.data.addListener('click', function(event) {
+        const name = event.feature.getProperty('name');
+        new google.maps.InfoWindow({
+            content: `<strong>${name}</strong>`,
+            position: event.latLng
+        }).open(map);
+    });
+
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ location: jakarta }, (results, status) => {
         if (status === "OK" && results[0]) {
@@ -71,6 +124,7 @@ $(document).ready(function() {
     loadAwlrLastReading();
     loadArrLastReading();
     loadAwlrArrLastReading();
+    loadDeviceOffline();
 });
 
 function loadAwlrLastReading() {
@@ -800,6 +854,50 @@ function loadContentAwlrArrLastReading(awlr_arr_last_reading) {
 
                 <div class="warning-bar-container mt-2">
                     ${warning_status_bar}
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
+function loadDeviceOffline() {
+    getData(`/Home/GetSensorOffline`).then(res => {
+        let result = res;
+        
+        if(result && result.metaData?.code === 200) {
+            $.each(result.response, function(key, off_reading) {
+                var contentStation = loadContentSensorOffline(off_reading);
+
+                if($(`#card-offline-${off_reading.id}`).length) {
+                    $(`#card-offline-${off_reading.id}`).html(contentStation);
+                } else {
+                    $('#sensorList').append(`
+                        <div class="card-offline-device" data-ts-id="${off_reading.id}" id="card-station-${off_reading.id}" data-last-update="${(off_reading.reading_at == null) ? '' : moment(off_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}">
+                            ${contentStation}
+                        </div>
+                    `);
+                }
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+function loadContentSensorOffline(off_reading) {
+    return `<div class="card-station-awlr">
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden animate__animated animate__fadeInUp" style="background: #f8f9fa;">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="d-flex flex-column">
+                        <strong class="fs-8">${off_reading.name}</strong>
+                        <span class="text-muted small">${off_reading.device_id}</span> 
+                    </div>
+                </div>
+ 
+                <div class="d-flex align-items-center text-muted small mb-3">
+                    <i class="far fa-clock me-1"></i>
+                    <span>${(off_reading.reading_at == null) ? '' : moment(off_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}</span>
                 </div>
             </div>
         </div>

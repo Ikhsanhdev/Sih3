@@ -17,6 +17,7 @@ namespace Sih3.Repositories
         Task<IReadOnlyList<dynamic>> GetAwlrLastReadingAsync();
         Task<IReadOnlyList<dynamic>> GetArrLastReadingAsync();
         Task<IReadOnlyList<dynamic>> GetAwlrArrLastReadingAsync();
+        Task<IReadOnlyList<dynamic>> GetSensorOffline();
     }
 
     public class ReadingRepository : IReadingRepository
@@ -319,6 +320,28 @@ namespace Sih3.Repositories
                     ORDER BY 
                         brand_name, name;
                 ";
+
+                var result = await _db.QueryAsync<dynamic>(query);
+                return result.ToList();
+            }
+            catch (NpgsqlException ex)
+            {
+                Log.Error(ex, "PostgreSQL Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "General Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+        }
+
+        public async Task<IReadOnlyList<dynamic>> GetSensorOffline()
+        {
+            try
+            {
+                using var _db = new NpgsqlConnection(_connectionString);
+                var query = $@"SELECT * FROM sensor_offline";
 
                 var result = await _db.QueryAsync<dynamic>(query);
                 return result.ToList();

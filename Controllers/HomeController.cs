@@ -81,6 +81,21 @@ public class HomeController : Controller
         return Json(result);
     }
 
+    public async Task<JsonResult> GetSensorOffline()
+    {
+        var result = new HttpResult();
+        var getResult = await _unitOfWorkRepository.Readings.GetSensorOffline();
+
+        result.metaData = new MetaData
+        {
+            code = 200,
+            message = "OK"
+        };
+
+        result.response = getResult;
+        return Json(result);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

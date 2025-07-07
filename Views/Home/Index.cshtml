@@ -5,290 +5,32 @@
 @section Styles {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link href="~/lib/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/map.css" rel="stylesheet" type="text/css" />
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        #map {
-            width: 100vw; /* Lebar layar penuh */
-            height: 100vh; /* Tinggi layar penuh */
-            position: absolute; /* Menutupi seluruh layar */
-            top: 0;
-            left: 0;
-            z-index: 0; /* Urutan tumpukan */
-            overflow: hidden;
-        }
-
-        #sidebar-kiri {
-            position: absolute;
-            top: 100px;
-            left: 20px;
-            width: 400px;
-            height: 80vh;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-        }
-
-        #sidebar-kanan {
-            position: absolute;
-            top: 100px;
-            right: 20px;
-            width: 320px;
-            height: 40vh;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-        }
-
-        #sidebar-legenda {
-            position: absolute;
-            bottom: 125px;
-            right: 20px;
-            width: 320px;
-            height: 30vh;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-        }
-
-        #sidebar-kanan.minimized {
-            transform: translateX(340px);
-        }
-
-        #sidebar-legenda.minimized {
-            transform: translateX(340px);
-        }
-
-        #sidebar-kiri.minimized {
-            transform: translateX(-370px);
-        }
-
-        /* Tombol toggle */
-        #toggleBtn-kiri {
-            position: absolute;
-            top: 400px;
-            left: 418px;
-            width: 35px;
-            height: 50px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 20%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-            transition: left 0.3s ease;
-        }
-
-        #toggleBtn-kanan {
-            position: absolute;
-            top: 250px;
-            right: 338px;
-            width: 35px;
-            height: 50px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 20%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-            transition: left 0.3s ease;
-        }
         
-        #toggleBtn-legenda {
-            position: absolute;
-            bottom: 220px;
-            right: 338px;
-            width: 35px;
-            height: 50px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 20%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-            transition: left 0.3s ease;
-        }
-
-        #sidebar-kiri.minimized + #toggleBtn-kiri {
-            left: 0px;
-        }
-
-        #sidebar-kanan.minimized + #toggleBtn-kanan {
-            right: 0px;
-        }
-
-        #sidebar-legenda.minimized + #toggleBtn-legenda {
-            right: 0px;
-        }
-
-        #toggleBtn-kiri i {
-            font-size: 14px;
-        }
-
-        #toggleBtn-kanan i {
-            font-size: 14px;
-        }
-
-        #toggleBtn-legenda i {
-            font-size: 14px;
-        }
-
-        .reading-at {
-            font-size: 10px;
-        }
-
-        .text-station-name {
-            font-size: 12px;
-        }
-
-        .bg-siaga1 {
-            background-color: #EF5350;
-        }
-
-        .bg-siaga2 {
-            background-color: rgba(242,131,35);
-        }
-
-        .bg-siaga3 {
-            background-color: rgba(247,184,75);
-        }
-
-        .bg-normal {
-            background-color: rgba(26,188,156);
-        }
-
-        .bg-nostatus {
-            background-color: rgba(204, 204, 204);
-        }
-
-        /* progress meter */
-        .progress-meter {
-            min-height: 6px;
-        }
-
-        .progress-meter > .meter {
-            position: relative;
-            float: left;
-            min-height: 6px;
-            border-width: 0px;
-            border-style: solid;
-            border-color: rgb(160, 160, 160);
-        }
-
-        .progress-meter > .meter:hover {
-            cursor: pointer;
-        }
-
-        .progress-meter > .meter-normal {
-            background-color: #4DC27E;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
-
-        .progress-meter > .meter-waspada {
-            background-color: #FFDA4F;
-        }
-
-        .progress-meter > .meter-siaga {
-            background-color: #FFA600;
-        }
-
-        .progress-meter > .meter-awas {
-            background-color: #EF5350;
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-
-        .progress-meter > .meter-left {
-            border-left-width: 1px;
-        }
-
-        .progress-meter > .meter > .meter-text {
-            position: absolute;
-            display: inline-block;
-            bottom: -18px;
-            width: 100%;
-            font-weight: 600;
-            font-size: 0.65em;
-            color: rgb(160, 160, 160);
-            text-align: left;
-        }
-
-        .gm-style .gm-style-iw-d {
-            color: black !important;
-            font-size: 14px;
-            z-index: 9999;
-        }
-
-        .white-popup {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-            font-size: 14px;
-        }
     </style>
 }
 
 <div id="sidebar-kiri">
-    <div class="accordion" id="accordionParent">
+    <div class="accordion" id="hidrologi">
         <!-- Kartu Utama: Hidrologi -->
         <div class="card">
-            <div class="card-header bg-info" id="headingMain">
+            <div class="card-header bg-primary text-white" id="headingHidrologi">
                 <h2 class="mb-0">
-                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="false" aria-controls="collapseMain">
+                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapaseHidrologi" aria-expanded="false" aria-controls="collapaseHidrologi">
                         <i class="fa-solid fa-tint me-2"></i> Hidrologi
                     </button>
                 </h2>
             </div>
 
-            <div id="collapseMain" class="accordion-collapse collapse show" aria-labelledby="headingMain">
+            <div id="collapaseHidrologi" class="accordion-collapse collapse show" aria-labelledby="headingHidrologi">
                 <div class="card-body">
                     <!-- Nested Accordion: Di dalam Hidrologi -->
                     <div class="accordion" id="accordionNested">
                         <div class="card">
-                            <div class="card-header" id="nestedHeadingTwo">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-arr" aria-expanded="false" aria-controls="nestedCollapseTwo">
-                                        <i class="fa-solid fa-cloud-rain me-2"></i> Curah Hujan
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="body-arr" class="accordion-collapse collapse" aria-labelledby="nestedHeadingTwo" data-bs-parent="#accordionNested">
-                                <div class="card-body" id="arr-body"></div>
-                            </div>
-                        </div>
-                        <!-- Nested Card 1: AWLR -->
-                        <div class="card">
                             <div class="card-header" id="nestedHeadingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr" aria-expanded="false" aria-controls="nestedCollapseOne">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-accordion" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr" aria-expanded="false" aria-controls="nestedCollapseOne">
                                         <i class="fa-solid fa-water me-2"></i> AWLR
                                     </button>
                                 </h2>
@@ -299,9 +41,22 @@
                         </div>
 
                         <div class="card">
+                            <div class="card-header" id="nestedHeadingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-accordion" type="button" data-bs-toggle="collapse" data-bs-target="#body-arr" aria-expanded="false" aria-controls="nestedCollapseTwo">
+                                        <i class="fa-solid fa-cloud-rain me-2"></i> Curah Hujan
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="body-arr" class="accordion-collapse collapse" aria-labelledby="nestedHeadingTwo" data-bs-parent="#accordionNested">
+                                <div class="card-body" id="arr-body"></div>
+                            </div>
+                        </div>
+
+                        <div class="card">
                             <div class="card-header" id="nestedHeadingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr-arr" aria-expanded="false" aria-controls="nestedCollapseOne">
+                                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-accordion" type="button" data-bs-toggle="collapse" data-bs-target="#body-awlr-arr" aria-expanded="false" aria-controls="nestedCollapseOne">
                                         <i class="fa-solid fa-water me-2"></i> AWLR & ARR
                                     </button>
                                 </h2>
@@ -314,7 +69,43 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><br>
+
+    <div class="accordion" id="hidrogeologi">
+        <div class="card">
+            <div class="card-header bg-warning text-white" id="headingHidrogeologi">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHidrogeologi" aria-expanded="false" aria-controls="collapseHidrogeologi">
+                        <i class="fa-solid fa-mountain-sun me-2"></i> Hidrogeologi
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseHidrogeologi" class="accordion-collapse collapse show" aria-labelledby="collapseHidrogeologi">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <div class="accordion" id="hidrometeorologi">
+        <div class="card">
+            <div class="card-header bg-success text-white" id="headingHidrometeorologi">
+                <h2 class="mb-0">
+                    <button class="btn btn-link w-100 text-start text-decoration-none collapsed text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHidrometeorologi" aria-expanded="false" aria-controls="collapseHidrometeorologi">
+                        <i class="fa-solid fa-cloud-rain me-2"></i> Hidrogeologi
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapaseHidrocollapseHidrometeorologilogi" class="accordion-collapse collapse show" aria-labelledby="headingHidrometeorologi">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div><br>
 </div>
 
 <!-- Tombol toggle -->
@@ -322,16 +113,69 @@
     <i id="toggleIcon-kiri" class="bi bi-chevron-left"></i>
 </button>
 
-<div id="sidebar-kanan">
+<div class="card" id="sidebar-kanan">
+    <div class="card-header" style="background: #354779;">
+        <h6 class="card-title mb-0 text-white">
+            <i class="fa-solid fa-triangle-exclamation"></i> 
+            Sensor Offline
+            <span class="sensor-count" id="sensorCount">0</span>
+        </h6>
+    </div>
+
+    <div class="card-body">
+        <div class="row m-b-halfrow offline-sensor-showhide">
+            <div class="col-xs-12">
+                <div class="text-muted text-center p-2" style="background-color: #f0f0f0; border-radius: 4px; font-size: 12px;">
+                    Untuk sensor yang offline &gt; 12 jam
+                </div>
+            </div>
+        </div>
+
+        <div id="sensorList">
+            <!-- Sensor items will be populated here -->
+        </div>
+        
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fa-solid fa-check-circle"></i>
+            <p class="mb-0">Semua sensor online</p>
+        </div>
+    </div>
 </div>
 
 <button id="toggleBtn-kanan" title="Minimize">
     <i id="toggleIcon-kanan" class="bi bi-chevron-right"></i>
 </button>
 
-<div id="sidebar-legenda">
-    <h4 style="color:#888;">Legenda</h4>
-    <p style="color:#aaa;">Konten sidebar di sini</p>
+<div class="card" id="sidebar-legenda">
+    <div class="card-header" style="background: #354779;">
+        <h6 class="card-title mb-0 text-white">
+            <i class="fa-solid fa-layer-group"></i> 
+            Legenda
+        </h6>
+    </div>
+
+    <div class="card-body small">
+        <div class="mb-2">
+            <i class="fa-solid fa-droplet me-2" style="color: green;"></i> 
+            <span class="text-muted">DAS Kapuas</span>
+        </div>
+        <div class="mb-2">
+            <i class="fa-solid fa-droplet me-2" style="color: red;"></i> 
+            <span class="text-muted">DAS Sambas</span>
+        </div>
+        <div class="mb-2">
+            <i class="fa-solid fa-droplet me-2" style="color: orange;"></i> 
+            <span class="text-muted">DAS Pawan</span>
+        </div>
+
+        <hr class="my-2" />
+
+        
+        <div class="mb-2">
+            <img src="~/assets/img/awlr-marker.png" width="25" alt="">
+            <span class="text-muted"> AWLR</span>
+        </div>
+    </div>
 </div>
 
 <button id="toggleBtn-legenda" title="Minimize">
