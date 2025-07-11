@@ -96,6 +96,12 @@ public class HomeController : Controller
         return Json(result);
     }
 
+    public async Task<IActionResult> GetSensorOfflineCount()
+    {
+        var count = await _unitOfWorkRepository.Readings.GetCountSensorOffline();
+        return Json(count); // pastikan nilai kembalian adalah { jumlah: n }
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

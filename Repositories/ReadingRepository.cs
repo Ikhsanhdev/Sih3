@@ -18,6 +18,7 @@ namespace Sih3.Repositories
         Task<IReadOnlyList<dynamic>> GetArrLastReadingAsync();
         Task<IReadOnlyList<dynamic>> GetAwlrArrLastReadingAsync();
         Task<IReadOnlyList<dynamic>> GetSensorOffline();
+        Task<dynamic> GetCountSensorOffline();
     }
 
     public class ReadingRepository : IReadingRepository
@@ -345,6 +346,28 @@ namespace Sih3.Repositories
 
                 var result = await _db.QueryAsync<dynamic>(query);
                 return result.ToList();
+            }
+            catch (NpgsqlException ex)
+            {
+                Log.Error(ex, "PostgreSQL Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "General Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+        }
+
+        public async Task<dynamic> GetCountSensorOffline()
+        {
+            try
+            {
+                using var _db = new NpgsqlConnection(_connectionString);
+                var query = $@"SELECT COUNT(name) AS jumlah FROM sensor_offline";
+
+                var result = await _db.QueryAsync<dynamic>(query);
+                return result.FirstOrDefault();
             }
             catch (NpgsqlException ex)
             {

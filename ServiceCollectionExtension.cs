@@ -1,6 +1,6 @@
 using Sih3.Interfaces;
 using Sih3.Repositories;
-// using Sih3.Services;
+using Sih3.Services;
 
 namespace Sih3
 {
@@ -10,14 +10,16 @@ namespace Sih3
     {
       #region ========== [ Register Unit Of Works ] ==========
       services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
+      services.AddScoped<IUnitOfWorkService, UnitOfWorkService>();
       #endregion
 
       #region ========== [ Register Services ] ==========
-      
+      services.AddScoped<IAuthService, AuthService>();
       #endregion
 
       #region ========== [ Register Repositories ] ==========
       services.AddScoped<IReadingRepository, ReadingRepository>();
+      services.AddScoped<IUserRepository, UserRepository>();
       #endregion
     }
   }

@@ -152,6 +152,7 @@ h6 {
   padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
+  margin-bottom: 0;
 }
 
 .header .header-container {
@@ -764,8 +765,12 @@ section,
 # Global Section Titles
 --------------------------------------------------------------*/
 .section-title {
-  padding-bottom: 60px;
+  padding-bottom: 20px;
   position: relative;
+}
+
+.title-article {
+  margin-top: 100px;
 }
 
 .section-title h2 {
@@ -785,7 +790,7 @@ section,
   width: 120px;
   height: 1px;
   display: inline-block;
-  background: var(--accent-color);
+  background: var(--nav-hover-color);
   margin: 4px 10px;
 }
 
@@ -809,7 +814,7 @@ section,
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 100px 0;
+  padding: 50px 0;
 }
 
 .hero::after {
@@ -860,11 +865,12 @@ section,
 }
 
 .hero .main-heading h1 {
-  font-size: 5rem;
-  font-weight: 800;
+  font-size: 4rem;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -1px;
   margin: 0;
+  color: var(--accent-color);
 }
 
 @media (max-width: 1200px) {
@@ -959,12 +965,12 @@ section,
 
 .hero .fluid-shape {
   position: relative;
-  width: 100%;
+  width: 75%;
   margin: 0 auto;
 }
 
 .hero .fluid-shape .fluid-img {
-  width: 100%;
+  width: 75%;
   height: auto;
   animation: float 6s ease-in-out infinite;
 }
@@ -3505,7 +3511,7 @@ section,
 }
 
 .service-details .service-sidebar .action-card {
-  background: linear-gradient(135deg, var(--accent-color) 0%, color-mix(in srgb, var(--accent-color), black 20%) 100%);
+  background: var(--navbar-color);
   border-radius: 15px;
   padding: 35px 30px;
   color: var(--contrast-color);

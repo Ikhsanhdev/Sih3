@@ -7,12 +7,15 @@ namespace Sih3.Repositories
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {
         public UnitOfWorkRepository(
-            IReadingRepository readingRepository
+            IReadingRepository readingRepository,
+            IUserRepository userRepository
         )
         {
             Readings = readingRepository;
+            User = userRepository;
         }
 
         public IReadingRepository Readings { get; set; }
+        public IUserRepository User { get; set;}
     }
 }

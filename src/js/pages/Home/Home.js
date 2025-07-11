@@ -125,6 +125,7 @@ $(document).ready(function() {
     loadArrLastReading();
     loadAwlrArrLastReading();
     loadDeviceOffline();
+    fetchSensorOfflineCount();
 });
 
 function loadAwlrLastReading() {
@@ -902,6 +903,17 @@ function loadContentSensorOffline(off_reading) {
             </div>
         </div>
     </div>`;
+}
+
+async function fetchSensorOfflineCount() {
+    try {
+        const response = await fetch('/Home/GetSensorOfflineCount');
+        const data = await response.json();
+        const jumlah = data?.jumlah ?? 0;
+        document.getElementById('sensorCount').textContent = jumlah;
+    } catch (error) {
+        console.error('Gagal mengambil data sensor offline:', error);
+    }
 }
 
 function getData(url) {
