@@ -873,7 +873,7 @@ function loadDeviceOffline() {
                     $(`#card-offline-${off_reading.id}`).html(contentStation);
                 } else {
                     $('#sensorList').append(`
-                        <div class="card-offline-device" data-ts-id="${off_reading.id}" id="card-station-${off_reading.id}" data-last-update="${(off_reading.reading_at == null) ? '' : moment(off_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}">
+                        <div class="card-offline-device" data-ts-id="${off_reading.id}" id="card-offline-${off_reading.id}" data-last-update="${(off_reading.reading_at == null) ? '' : moment(off_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}">
                             ${contentStation}
                         </div>
                     `);
@@ -886,7 +886,7 @@ function loadDeviceOffline() {
 }
 
 function loadContentSensorOffline(off_reading) {
-    return `<div class="card-station-awlr">
+    return `
         <div class="card shadow-sm border-0 rounded-4 overflow-hidden animate__animated animate__fadeInUp" style="background: #f8f9fa;">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -895,15 +895,15 @@ function loadContentSensorOffline(off_reading) {
                         <span class="text-muted small">${off_reading.device_id}</span> 
                     </div>
                 </div>
- 
                 <div class="d-flex align-items-center text-muted small mb-3">
                     <i class="far fa-clock me-1"></i>
                     <span>${(off_reading.reading_at == null) ? '' : moment(off_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}</span>
                 </div>
             </div>
         </div>
-    </div>`;
+    `;
 }
+
 
 async function fetchSensorOfflineCount() {
     try {

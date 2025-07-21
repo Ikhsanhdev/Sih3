@@ -24,10 +24,9 @@ public class UserRepository : IUserRepository {
                     username AS ""Username"",
                     name AS ""Name"",
                     email AS ""Email"",
-                    phone AS ""Phone"",
                     password AS ""Password"",
                     last_login AS ""LastLogin""
-                FROM users WHERE id = @id";
+                FROM user_sih3 WHERE id = @id";
 
             using var connection = new NpgsqlConnection(_connectionString);
             User? user = await connection.QueryFirstOrDefaultAsync<User>(query, new { id });
@@ -46,10 +45,9 @@ public class UserRepository : IUserRepository {
                     username AS ""Username"",
                     name AS ""Name"",
                     email AS ""Email"",
-                    phone AS ""Phone"",
                     password AS ""Password"",
                     last_login AS ""LastLogin""
-                FROM users WHERE username = @username";
+                FROM user_sih3 WHERE username = @username";
 
             using var connection = new NpgsqlConnection(_connectionString);
             User? user = await connection.QueryFirstOrDefaultAsync<User>(query, new { username });
@@ -63,7 +61,7 @@ public class UserRepository : IUserRepository {
 
     public async Task UpdateLastLoginAsync(Guid id) {
         try {
-            string query = @"UPDATE users SET last_login = @DateNow WHERE id = @id";
+            string query = @"UPDATE user_sih3 SET last_login = @DateNow WHERE id = @id";
             using var connection = new NpgsqlConnection(_connectionString);
             var parameters = new
             {

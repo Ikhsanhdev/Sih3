@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] | SIH 3 BWS KALIMANTAN I</title>
+    <link rel="icon" href="~/assets/img/logo-pu.png" type="image/png">
+    <link href="~/asset/css/pace.min.css" rel="stylesheet">
+
+    <!--plugins-->
+    <link href="~/asset/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/metismenu/mm-vertical.css">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/simplebar/css/simplebar.css">
+    <!--bootstrap css-->
+    <link href="~/asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+    <!--main css-->
+    <link href="~/asset/css/bootstrap-extended.css" rel="stylesheet">
+    <link href="~/sass/main.css" rel="stylesheet">
+    <link href="~/sass/dark-theme.css" rel="stylesheet">
+    <link href="~/sass/blue-theme.css" rel="stylesheet">
+    <link href="~/sass/semi-dark.css" rel="stylesheet">
+    <link href="~/sass/bordered-theme.css" rel="stylesheet">
+    <link href="~/sass/responsive.css" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <nav class="navbar navbar-expand align-items-center gap-4">
+            <div class="btn-toggle">
+                <a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
+            </div>
+            <div class="search-bar flex-grow-1">
+                <div class="position-relative">
+                    <input class="form-control rounded-5 px-5 search-control d-lg-block d-none" type="text" placeholder="Search">
+                    <span class="material-icons-outlined position-absolute d-lg-block d-none ms-3 translate-middle-y start-0 top-50">search</span>
+                    <span class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 search-close">close</span>
+                    <div class="search-popup p-3">
+                        <div class="card rounded-4 overflow-hidden">
+                            <div class="card-header d-lg-none">
+                                <div class="position-relative">
+                                    <input class="form-control rounded-5 px-5 mobile-search-control" type="text" placeholder="Search">
+                                    <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50">search</span>
+                                    <span class="material-icons-outlined position-absolute me-3 translate-middle-y end-0 top-50 mobile-search-close">close</span>
+                                </div>
+                            </div>
+                            <div class="card-body search-content">
+                                <p class="search-title">Recent Searches</p>
+                                <div class="d-flex align-items-start flex-wrap gap-2 kewords-wrapper">
+                                    <a href="javascript:;" class="kewords"><span>Angular Template</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>Dashboard</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>Admin Template</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>Bootstrap 5 Admin</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>Html eCommerce</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>Sass</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                    <a href="javascript:;" class="kewords"><span>laravel 9</span><i
+                                        class="material-icons-outlined fs-6">search</i></a>
+                                </div>
+                                <hr>
+                                <p class="search-title">Tutorials</p>
+                                <div class="search-list d-flex flex-column gap-2">
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="list-icon">
+                                            <i class="material-icons-outlined fs-5">play_circle</i>
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title ">Wordpress Tutorials</h5>
+                                        </div>
+                                    </div>
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="list-icon">
+                                            <i class="material-icons-outlined fs-5">shopping_basket</i>
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title">eCommerce Website Tutorials</h5>
+                                        </div>
+                                    </div>
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="list-icon">
+                                            <i class="material-icons-outlined fs-5">laptop</i>
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title">Responsive Design</h5>
+                                        </div>
+                                    </div>
+                                </div>
+  
+                                <hr>
+                                <p class="search-title">Members</p>
+                                <div class="search-list d-flex flex-column gap-2">
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="memmber-img">
+                                            <img src="https://placehold.co/110x110/png" width="32" height="32" class="rounded-circle" alt="">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title ">Andrew Stark</h5>
+                                        </div>
+                                    </div>
+  
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="memmber-img">
+                                            <img src="https://placehold.co/110x110/png" width="32" height="32" class="rounded-circle" alt="">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title ">Snetro Jhonia</h5>
+                                        </div>
+                                    </div>
+  
+                                    <div class="search-list-item d-flex align-items-center gap-3">
+                                        <div class="memmber-img">
+                                            <img src="https://placehold.co/110x110/png" width="32" height="32" class="rounded-circle" alt="">
+                                        </div>
+                                        <div class="">
+                                            <h5 class="mb-0 search-list-title">Michle Clark</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center bg-transparent">
+                                <a href="javascript:;" class="btn w-100">See All Search Results</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav gap-1 nav-right-links align-items-center">
+                <li class="nav-item d-lg-none mobile-search-btn">
+                    <a class="nav-link" href="javascript:;"><i class="material-icons-outlined">search</i></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;" data-bs-toggle="dropdown"><img src="~/asset/images/county/02.png" width="22" alt=""></a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/01.png" width="20" alt=""><span class="ms-2">English</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/02.png" width="20" alt=""><span class="ms-2">Catalan</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/03.png" width="20" alt=""><span class="ms-2">French</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/04.png" width="20" alt=""><span class="ms-2">Belize</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/05.png" width="20" alt=""><span class="ms-2">Colombia</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/06.png" width="20" alt=""><span class="ms-2">Spanish</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/07.png" width="20" alt=""><span class="ms-2">Georgian</span></a>
+                        </li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="~/asset/images/county/08.png" width="20" alt=""><span class="ms-2">Hindi</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                        <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 border" width="45" height="45" alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
+                        <a class="dropdown-item  gap-2 py-2" href="javascript:;">
+                            <div class="text-center">
+                                <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 shadow mb-3" width="90" height="90"
+                                alt="">
+                                <h5 class="user-name mb-0 fw-bold">Hello, Jhon</h5>
+                            </div>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+                            class="material-icons-outlined">person_outline</i>Profile</a>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+                            class="material-icons-outlined">local_bar</i>Setting</a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:;"><i
+                            class="material-icons-outlined">power_settings_new</i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <img src="~/assets/img/logo-pu.png" class="logo-img" alt="">
+            </div>
+            <div class="logo-name flex-grow-1">
+                <h5 class="mb-0">BWS KALIMANTAN I</h5>
+                <div style="font-size: 9px; color: #364c61;">
+                    Sistem Informasi Hirodologi,<br />
+                    Hidrogeologi & Hidrometeorologi
+                </div>
+            </div>
+            <div class="sidebar-close">
+                <span class="material-icons-outlined">close</span>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <!--navigation-->
+            <ul class="metismenu" id="sidenav">
+                <li class="menu-label">App & Pages</li>
+                <li>
+                    <a href="/Admin">
+                        <div class="parent-icon"><i class="material-icons-outlined">home</i>
+                        </div>
+                        <div class="menu-title">Dasboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Admin/Article">
+                        <div class="parent-icon"><i class="material-icons-outlined">article</i>
+                        </div>
+                        <div class="menu-title">Article</div>
+                    </a>
+                </li>
+            </ul>
+            <!--end navigation-->
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        @RenderBody()
+    </main>
+
+    <div class="overlay btn-toggle"></div>
+
+    <footer class="page-footer">
+        <p class="mb-0">Copyright © 2024. All right reserved.</p>
+    </footer>
+
+    <script src="~/asset/js/pace.min.js"></script>
+
+    <!--plugins-->
+    <script src="~/asset/js/jquery.min.js"></script>
+    <script src="~/asset/plugins/apexchart/apexcharts.min.js"></script> 
+    <script src="~/asset/js/bootstrap.bundle.min.js"></script>
+    <script src="~/asset/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="~/asset/plugins/metismenu/metisMenu.min.js"></script>
+    <script src="~/asset/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="~/asset/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/asset/js/main.js"></script>
+    <script src="~/asset/js/dashboard1.js"></script>
+
+    <script>
+        $(".data-attributes span").peity("donut")
+        new PerfectScrollbar(".user-list")
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Styles", required: false)
+</body>
+</html>

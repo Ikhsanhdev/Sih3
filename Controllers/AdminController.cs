@@ -28,4 +28,9 @@ public class AdminController : Controller
     {
         return View();
     }
+
+    public IActionResult Article()
+    {
+        return View();
+    }
 }

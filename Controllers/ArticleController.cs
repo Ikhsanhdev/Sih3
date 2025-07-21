@@ -29,4 +29,9 @@ public class ArticleController : Controller
     {
         return View();
     }
+
+    public IActionResult Detail()
+    {
+        return View();
+    }
 }

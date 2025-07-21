@@ -20,11 +20,11 @@ public partial class Sih3Context : DbContext {
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("users_pkey");
+            entity.HasKey(e => e.Id).HasName("user_sih3_pkey");
 
-            entity.ToTable("users");
+            entity.ToTable("users_sih3");
 
-            entity.HasIndex(e => e.RoleId, "users_role_id_index");
+            // entity.HasIndex(e => e.RoleId, "users_role_id_index");
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -48,14 +48,11 @@ public partial class Sih3Context : DbContext {
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
-            entity.Property(e => e.RememberToken)
-                .HasMaxLength(100)
-                .HasColumnName("remember_token");
-            entity.Property(e => e.RoleId).HasColumnName("role_id");
+            // entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp(0) without time zone")
                 .HasColumnName("updated_at");
-            entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
+            // entity.Property(e => e.UpdatedBy).HasColumnName("updated_by");
             entity.Property(e => e.Username)
                 .HasMaxLength(255)
                 .HasColumnName("username");;

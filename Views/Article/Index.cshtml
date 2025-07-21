@@ -5,9 +5,31 @@
 @section Styles {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link href="~/lib/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/asset/css/pace.min.css" rel="stylesheet">
+
+    <!--plugins-->
+    <link href="~/asset/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/metismenu/mm-vertical.css">
+    <link rel="stylesheet" type="text/css" href="~/asset/plugins/simplebar/css/simplebar.css">
+    <!--bootstrap css-->
+    @* <link href="~/asset/css/bootstrap.min.css" rel="stylesheet"> *@
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+    <!--main css-->
+    <link href="~/asset/css/bootstrap-extended.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/asset/css/extra-icons.css">
+    <link href="~/sass/main.css" rel="stylesheet">
+    <link href="~/sass/responsive.css" rel="stylesheet">
     <style>
         #pricing {
             background: linear-gradient(120deg, #354779, #ffc829) !important;           
+        }
+
+        .card-img {
+            height: 500px; /* Atur tinggi sesuai kebutuhan */
+            object-fit: cover;
         }
     </style>
 }
@@ -22,32 +44,103 @@
 <section id="service-details" class="service-details section">
     <div class="container-fluid px-4 px-md-5" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-5">
-            <div class="col-lg-3 order-lg-1 order-2">
+            <div class="col-lg-2 order-lg-1 order-2">
                 <div class="service-sidebar" data-aos="fade-right">
                     <div class="action-card" data-aos="zoom-in" data-aos-delay="100">
-                        <h3>Ready to Boost Your Online Presence?</h3>
-                        <p>Get a free consultation with our digital marketing experts and discover how we can help grow your business.</p>
-                        <a href="#" class="btn-primary">Schedule Consultation</a>
-                        <span class="guarantee"><i class="bi bi-shield-check"></i> 100% Satisfaction Guarantee</span>
+                        <div class="d-flex align-items-center gap-2 text-start">
+                            <i class="fadeIn animated bx bx-search fs-4"></i>
+                            <h4 class="mb-0">Cari Artikel</h4>
+                        </div></br>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."><br>
+
+                        <div class="d-flex align-items-center gap-2 text-start">
+                            <i class="fadeIn animated bx bx-filter fs-4"></i>
+                            <h4 class="mb-0">Filter Kategori</h4>
+                        </div></br>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Semua</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                            <label class="form-check-label" for="flexCheckChecked">Hidrologi</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">Hidrogeologi</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">Hidrometeorologi</label>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-9 order-lg-2 order-1">
-                <div class="service-main-content">
-                    <div class="service-header" data-aos="fade-up">
-                        <h1>Digital Marketing Excellence</h1>
-                        <div class="service-meta">
-                            <span><i class="bi bi-award"></i> Premium Service</span>
-                            <span><i class="bi bi-clock"></i> Since 2015</span>
-                            <span><i class="bi bi-star-fill"></i> 4.9/5 Rating</span>
+            <div class="col-lg-10 order-lg-2 order-1">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card rounded-4">
+                            <img src="~/images/article-2.jpg" class="card-img rounded-4" alt="...">
+                            <div class="card-img-overlay">
+                                <p class="mb-4 text-white text-uppercase">Hidrologi</p>
+                                <h3 class="card-title text-white">Various versions evolved</h3>
+                                <p class="mb-0 text-white">It was popularised in the 1960s with the release of Letraset sheets containing.</p>
+                            </div>
+                            <div class="bottom-0 position-absolute m-3">
+                                <a href="javascript:;" class="btn text-accent px-3 btn-warning d-flex gap-2">Read More<span class="material-icons-outlined">east</span></a>
+                            </div>
                         </div>
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo erat at malesuada bibendum. Nullam eu risus sit amet nunc fermentum lacinia.
-                        </p>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card rounded-4">
+                            <img src="~/images/article-1.jpg" class="card-img rounded-4" alt="...">
+                            <div class="card-img-overlay">
+                                <p class="mb-4 text-white text-uppercase">Hidrogeologi</p>
+                                <h3 class="card-title text-white">Various versions evolved</h3>
+                                <p class="mb-0 text-white">It was popularised in the 1960s with the release of Letraset sheets containing.</p>
+                            </div>
+                            <div class="bottom-0 position-absolute m-3">
+                                <a href="javascript:;" class="btn text-accent px-3 btn-warning d-flex gap-2">Read More<span class="material-icons-outlined">east</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card rounded-4">
+                            <img src="~/images/article-4.jpg" class="card-img rounded-4" alt="...">
+                            <div class="card-img-overlay">
+                                <p class="mb-4 text-white text-uppercase">Hidrologi</p>
+                                <h3 class="card-title text-white">Various versions evolved</h3>
+                                <p class="mb-0 text-white">It was popularised in the 1960s with the release of Letraset sheets containing.</p>
+                            </div>
+                            <div class="bottom-0 position-absolute m-3">
+                                <a href="javascript:;" class="btn text-accent px-3 btn-warning d-flex gap-2">Read More<span class="material-icons-outlined">east</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card rounded-4">
+                            <img src="~/images/article-3.jpg" class="card-img rounded-4" alt="...">
+                            <div class="card-img-overlay">
+                                <p class="mb-4 text-white text-uppercase">Hidrometeorologi</p>
+                                <h3 class="card-title text-white">Various versions evolved</h3>
+                                <p class="mb-0 text-white">It was popularised in the 1960s with the release of Letraset sheets containing.</p>
+                            </div>
+                            <div class="bottom-0 position-absolute m-3">
+                                <a href="javascript:;" class="btn text-accent px-3 btn-warning d-flex gap-2">Read More<span class="material-icons-outlined">east</span></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script src="~/asset/js/pace.min.js"></script>
+}
