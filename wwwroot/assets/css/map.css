@@ -63,10 +63,10 @@ html, body {
 
 #sidebar-legenda {
     position: absolute;
-    bottom: 125px;
+    bottom: 100px;
     right: 20px;
     width: 320px;
-    height: 30vh;
+    height: 35vh;
     background-color: #f8f9fa;
     padding: 0;
     border-radius: 12px;

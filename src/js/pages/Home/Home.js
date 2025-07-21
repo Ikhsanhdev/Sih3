@@ -457,22 +457,124 @@ function loadArrLastReading() {
                 }
 
                 if(arr_last_reading.latitude != null && arr_last_reading.longitude != null) {
-                    // var customIcon = L.divIcon({ 
-                    //     iconSize: new L.Point(40, 20), 
-                    //     iconAnchor: new L.Point(20, 20), 
-                    //     html:  `<div class="ts-marker-wrapper"><a href="javascript:void(0)" class="ts-marker ts-arr" data-ts-id="64" data-ts-ln="60" style="outline: none;"><div class="ts-marker__title">${arr_last_reading.name}</div><image src="/images/intensity/${getIntensityIcon(arr_last_reading.intensity_hour)}" height="25" /></a></div>`}
-                    // );
+                    const marker = new google.maps.Marker({
+                        position: {
+                            lat: parseFloat(arr_last_reading.latitude),
+                            lng: parseFloat(arr_last_reading.longitude)
+                        },
+                        map: map,
+                        title: arr_last_reading.name,
+                        icon: {
+                            url: 'assets/img/arr-marker.png', // Ganti dengan path ikonmu
+                            scaledSize: new google.maps.Size(45, 50), // Ukuran ikon
+                            anchor: new google.maps.Point(16, 32) // Titik bawah tengah
+                        }
+                    });
 
-                    // var stationMarker = L.marker([arr_last_reading.latitude, arr_last_reading.longitude], {
-                    //     icon: customIcon,
-                    // }).bindPopup(createDetailPanelStation(arr_last_reading)).addTo(arr_marker);
+                    const contentHtml = `
+                        <div style="font-family: 'Arial', sans-serif;
+                            max-width: 280px;
+                            font-size: 13px;
+                            padding: 0;
+                            margin: 0;
+                            line-height: 1.3;">
+                            <div style="font-size: 15px;
+                                font-weight: bold;
+                                margin: 0;
+                                padding: 0;
+                                line-height: 1;">
+                                ${arr_last_reading.name || 'Tanpa Nama'}
+                            </div><br>
 
-                    // stationMarker.options.id = arr_last_reading.id;
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 6px;">
+                                <tr>
+                                    <td style="color: #555;">Device</td>
+                                    <td style="text-align: right;">
+                                        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 6px;">
+                                            <span>${arr_last_reading.brand_name || '-'}</span>
+                                            <span style="
+                                                display: inline-block;
+                                                background-color: #ffc107;
+                                                color: #000;
+                                                font-size: 11px;
+                                                padding: 2px 6px;
+                                                border-radius: 6px;
+                                            ">
+                                                ${arr_last_reading.device_id || '-'}
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #555;">Koordinat</td>
+                                    <td style="text-align: right; padding-left: 8px;">
+                                        ${parseFloat(arr_last_reading.latitude).toFixed(6)}, ${parseFloat(arr_last_reading.longitude).toFixed(6)}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #555;">Status</td>
+                                    <td style="text-align: right;">
+                                        <span style="
+                                            display: inline-block;
+                                            padding: 2px 6px;
+                                            font-size: 12px;
+                                            border-radius: 6px;
+                                            background-color: ${arr_last_reading.status === 'online' ? '#28a745' : '#6c757d'};
+                                            color: white;
+                                        ">
+                                            ${arr_last_reading.status === 'online' ? 'Online' : 'No Data'}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #555;">Curah Hujan</td>
+                                    <td style="text-align: right; font-weight: bold; font-size: 14px;">
+                                        ${parseFloat(arr_last_reading.rainfall || 0).toFixed(1)} mm
+                                    </td>
+                                </tr>
+                            </table>
 
-                    // $('.card-station-arr[data-ts-id="' + arr_last_reading.id + '"]').on('click', function () {
-                    //     map.setView([arr_last_reading.latitude, arr_last_reading.longitude], 12);
-                    //     stationMarker.openPopup();
-                    // });
+                            <div style="display: flex; align-items: center; font-size: 12px; color: #555;">
+                                <i class="far fa-clock" style="margin-right: 6px;"></i>
+                                ${moment(arr_last_reading.reading_at).locale('id').format('YYYY-MM-DD HH:mm:ss')}
+                            </div>
+                        </div>`;
+
+                    const infowindow = new google.maps.InfoWindow({
+                        content: contentHtml
+                    });
+
+                    marker.addListener("click", () => {
+                        infowindow.open(map, marker);
+                    });
+
+                    google.maps.event.addListener(infowindow, 'domready', function () {
+                        setTimeout(() => {
+                            const iwOuter = document.querySelector('.gm-style-iw');
+                            if (iwOuter) {
+                                iwOuter.style.padding = '0px';
+                                iwOuter.style.margin = '0px';
+
+                                const iwInnerWrapper = iwOuter.parentElement;
+                                if (iwInnerWrapper) {
+                                    iwInnerWrapper.style.padding = '0px';
+                                    iwInnerWrapper.style.margin = '0px';
+                                }
+
+                                const iwMainWrapper = iwInnerWrapper?.parentElement;
+                                if (iwMainWrapper) {
+                                    iwMainWrapper.style.padding = '0px';
+                                    iwMainWrapper.style.marginTop = '0px';
+                                }
+                            }
+
+                            const iwBackground = document.querySelector('.gm-style-iw-d');
+                            if (iwBackground) {
+                                iwBackground.style.margin = '0px';
+                                iwBackground.style.padding = '0px';
+                            }
+                        }, 50); // Delay 50ms agar elemen benar-benar siap
+                    });
                 }
             });
         }
@@ -633,22 +735,7 @@ function loadAwlrArrLastReading() {
                 }
 
                 if(last_reading.latitude != null && last_reading.longitude != null) {
-                    // var customIcon = L.divIcon({ 
-                    //     iconSize: new L.Point(40, 20), 
-                    //     iconAnchor: new L.Point(20, 20), 
-                    //     html:  `<div class="ts-marker-wrapper"><a href="javascript:void(0)" class="ts-marker ts-arr" data-ts-id="64" data-ts-ln="60" style="outline: none;"><div class="ts-marker__title">${arr_last_reading.name}</div><image src="/images/intensity/${getIntensityIcon(arr_last_reading.intensity_hour)}" height="25" /></a></div>`}
-                    // );
-
-                    // var stationMarker = L.marker([arr_last_reading.latitude, arr_last_reading.longitude], {
-                    //     icon: customIcon,
-                    // }).bindPopup(createDetailPanelStation(arr_last_reading)).addTo(arr_marker);
-
-                    // stationMarker.options.id = arr_last_reading.id;
-
-                    // $('.card-station-arr[data-ts-id="' + arr_last_reading.id + '"]').on('click', function () {
-                    //     map.setView([arr_last_reading.latitude, arr_last_reading.longitude], 12);
-                    //     stationMarker.openPopup();
-                    // });
+                    
                 }
             });
         }
