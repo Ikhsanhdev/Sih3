@@ -102,6 +102,12 @@ public class HomeController : Controller
         return Json(count); // pastikan nilai kembalian adalah { jumlah: n }
     }
 
+    public async Task<IActionResult> GetSensorCount()
+    {
+        var count = await _unitOfWorkRepository.Readings.GetCountSensor();
+        return Json(count);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

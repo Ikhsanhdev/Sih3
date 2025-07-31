@@ -6,5 +6,6 @@ namespace Sih3.Interfaces
     {
         IReadingRepository Readings { get; }
         IUserRepository User { get; }
+        IArticleRepository Article { get; }
     }
 }

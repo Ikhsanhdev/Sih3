@@ -1,0 +1,192 @@
+@model Sih3.ViewModels.ArticleVM;
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Create Article";
+}
+
+@section Styles {
+    <link href="~/asset/plugins/input-tags/css/tagsinput.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+}
+
+<div class="main-content">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3"><i class="bx bx-article"></i> Article</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Article</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <form id="form-article" data-parsley-validate class="tablelist-form parsley-validation" method="POST" novalidate autocomplete="off" onsubmit="createEditForm(this,event)" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        @if (Model.id != Guid.Empty) {
+                            <h5 class="mb-4">Edit Artikel</h5>
+                        } else {
+                            <h5 class="mb-4">Tambah Artikel</h5>
+                        }
+                        
+                        <div class="row mb-3">
+                            <input type="hidden" asp-for="id" class="form-control" id="id">
+                            <label for="articleTitle" class="col-sm-3 col-form-label">Judul Artikel</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="title" class="form-control" id="title" placeholder="Masukkan judul">
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="description" class="form-control" id="description" placeholder="Masukkan Keterangan">
+                        <div class="row mb-5">
+                            <label for="input36" class="col-sm-3 col-form-label">Deskripsi Artikel</label>
+                            <div class="col-sm-9">
+                                <div id="editor"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="category" class="col-sm-3 col-form-label">Kategori</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="category" asp-for="category">
+                                    <option selected="">Pilih Kategori</option>
+                                    <option value="d2a8cc96-3fca-43b0-8074-507dcf6221bf">Hidrologi</option>
+                                    <option value="090388d3-3b97-411b-8128-2921bc8deda3">Hidrogeologi</option>
+                                    <option value="cbcb9f7b-130f-4725-a677-fd6be80e79d1">Hidrometeorologi</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="img_url" class="form-control" id="img_url" placeholder="Masukkan URL Gambar" />
+                        @if (Model.img_url != null)
+                        {
+                            <div class="row mb-3">
+                                <label for="articleImage" class="form-label">Gambar Saat Ini</label><br />
+                                <div class="col-sm-9">
+                                    <img src="@Url.Content(Model.img_url)" class="img-fluid" style="height: 20vh; width: 20vh;" alt="Gambar Project" /> 
+                                </div>
+                            </div>
+                        }
+
+                        <div class="row mb-3">
+                            <label for="input38" class="col-sm-3 col-form-label">Gambar Artikel</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="img_project" name="img_project" placeholder="Masukkan URL Gambar" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4">Submit</button>
+                                    @* <button type="button" class="btn btn-royal px-4">Reset</button> *@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div> 
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/asset/plugins/input-tags/js/tagsinput.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+        var deskripsiTersimpan = "";
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var deskripsiTersimpan = document.getElementById("description").value;
+            if (deskripsiTersimpan) {
+                quill.root.innerHTML = deskripsiTersimpan;
+            }
+        });
+
+        quill.on('text-change', function () {
+            deskripsiTersimpan = quill.root.innerHTML;
+            document.getElementById("description").value = deskripsiTersimpan;
+        });
+
+        window.createEditForm = (form, evt) => {
+            evt.preventDefault();
+
+            console.log("Save Data");
+            var btnSubmit = $(form).find("button[type=submit]");
+            var id = document.getElementById("id").value;
+            if (id != null && id != "") {
+                console.log("Edit Data");
+            } else {
+                console.log("Create Data");
+            }
+
+            $(form).parsley().validate();
+            if ($(form).parsley().isValid()) {
+                beforeLoadingButton(btnSubmit);
+                let formData = new FormData();
+                formData.append("id", document.getElementById("id").value);
+                formData.append("title", document.getElementById("title").value);
+                formData.append("description", deskripsiTersimpan);
+                formData.append("category", document.getElementById("category").value);
+                formData.append("img_url", document.getElementById("img_url").value);
+                if ($("#img_project")[0].files.length > 0) {
+                formData.append("file", $("#img_project")[0].files[0]);
+                }
+                console.log("FormData:", Object.fromEntries(formData.entries()));
+
+                postData("/Admin/SaveArticle", formData)
+                .then((res) => {
+                    let result = res.data;
+                    if (result.code == 200) {
+                        showMessage("success", "Sukses!", result.message);
+                        setTimeout(() => {
+                            window.location.href = "/Admin/Article";
+                        }, 1000);
+                    } else {
+                        showMessage("error", "Gagal!", result.message);
+                    }
+                    afterLoadingButton(btnSubmit);
+                }).catch((err) => {
+                    console.log(err);
+                    afterLoadingButton(btnSubmit);
+                });
+            }
+        };
+
+        function beforeLoadingButton(button) {
+            $(button).prop("disabled", true);
+            $(button).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+        }
+
+        function afterLoadingButton(button) {
+            $(button).prop("disabled", false);
+            $(button).html('Submit');
+        }
+
+        function postData(url, data) {
+            return axios.post(url, data);
+        }
+
+        function showMessage(type, title, message) {
+            Swal.fire({
+                icon: type,
+                title: title,
+                text: message
+            });
+        }
+    </script>
+}

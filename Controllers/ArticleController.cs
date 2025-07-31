@@ -16,10 +16,10 @@ namespace Sih3.Controllers;
 
 public class ArticleController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<ArticleController> _logger;
     private readonly IUnitOfWorkRepository _unitOfWorkRepository;
 
-    public ArticleController(ILogger<HomeController> logger, IUnitOfWorkRepository unitOfWorkRepository)
+    public ArticleController(ILogger<ArticleController> logger, IUnitOfWorkRepository unitOfWorkRepository)
     {
         _logger = logger;
         _unitOfWorkRepository = unitOfWorkRepository;

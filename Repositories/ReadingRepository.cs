@@ -19,6 +19,7 @@ namespace Sih3.Repositories
         Task<IReadOnlyList<dynamic>> GetAwlrArrLastReadingAsync();
         Task<IReadOnlyList<dynamic>> GetSensorOffline();
         Task<dynamic> GetCountSensorOffline();
+        Task<dynamic> GetCountSensor();
     }
 
     public class ReadingRepository : IReadingRepository
@@ -365,6 +366,35 @@ namespace Sih3.Repositories
             {
                 using var _db = new NpgsqlConnection(_connectionString);
                 var query = $@"SELECT COUNT(name) AS jumlah FROM sensor_offline";
+
+                var result = await _db.QueryAsync<dynamic>(query);
+                return result.FirstOrDefault();
+            }
+            catch (NpgsqlException ex)
+            {
+                Log.Error(ex, "PostgreSQL Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "General Exception: {@ExceptionDetails}", new { ex.Message, ex.StackTrace });
+                throw;
+            }
+        }
+
+        public async Task<dynamic> GetCountSensor()
+        {
+            try
+            {
+                using var _db = new NpgsqlConnection(_connectionString);
+                var query = $@"SELECT
+                    COUNT(type) FILTER (WHERE type = 'AWLR_ARR') AS awlr_arr,
+                    COUNT(type) FILTER (WHERE type = 'AWLR') AS awlr,
+                    COUNT(type) FILTER (WHERE type = 'ARR') AS arr
+                FROM
+                    mv_stations
+                WHERE 
+                    station_type = 'Telemetry'";
 
                 var result = await _db.QueryAsync<dynamic>(query);
                 return result.FirstOrDefault();

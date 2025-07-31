@@ -15,11 +15,13 @@ namespace Sih3
 
       #region ========== [ Register Services ] ==========
       services.AddScoped<IAuthService, AuthService>();
+      services.AddScoped<ImageUploadService, ImageUploadService>();
       #endregion
 
       #region ========== [ Register Repositories ] ==========
       services.AddScoped<IReadingRepository, ReadingRepository>();
       services.AddScoped<IUserRepository, UserRepository>();
+      services.AddScoped<IArticleRepository, ArticleRepository>();
       #endregion
     }
   }

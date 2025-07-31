@@ -1,3 +1,4 @@
+@using Sih3.Helpers;
 <!doctype html>
 <html lang="en" data-bs-theme="light">
 <head>
@@ -14,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="~/asset/plugins/simplebar/css/simplebar.css">
     <!--bootstrap css-->
     <link href="~/asset/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/asset/css/extra-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
     <!--main css-->
@@ -24,6 +26,22 @@
     <link href="~/sass/semi-dark.css" rel="stylesheet">
     <link href="~/sass/bordered-theme.css" rel="stylesheet">
     <link href="~/sass/responsive.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main.main-wrapper {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <header class="top-header">
@@ -158,14 +176,13 @@
 
                 <li class="nav-item dropdown">
                     <a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                        <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 border" width="45" height="45" alt="">
+                        <img src="~/images/profile-user.png" class="rounded-circle p-1 border" width="45" height="45" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
                         <a class="dropdown-item  gap-2 py-2" href="javascript:;">
                             <div class="text-center">
-                                <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 shadow mb-3" width="90" height="90"
-                                alt="">
-                                <h5 class="user-name mb-0 fw-bold">Hello, Jhon</h5>
+                                <img src="~/images/profile-user.png" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="">
+                                <h5 class="user-name mb-0 fw-bold">@ClaimIdentity.Name</h5>
                             </div>
                         </a>
                         <hr class="dropdown-divider">
@@ -228,26 +245,19 @@
     <div class="overlay btn-toggle"></div>
 
     <footer class="page-footer">
-        <p class="mb-0">Copyright © 2024. All right reserved.</p>
+        <p class="mb-0">Copyright © 2025. All right reserved.</p>
     </footer>
 
     <script src="~/asset/js/pace.min.js"></script>
 
     <!--plugins-->
     <script src="~/asset/js/jquery.min.js"></script>
-    <script src="~/asset/plugins/apexchart/apexcharts.min.js"></script> 
     <script src="~/asset/js/bootstrap.bundle.min.js"></script>
     <script src="~/asset/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="~/asset/plugins/metismenu/metisMenu.min.js"></script>
     <script src="~/asset/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="~/asset/plugins/peity/jquery.peity.min.js"></script>
     <script src="~/asset/js/main.js"></script>
-    <script src="~/asset/js/dashboard1.js"></script>
-
-    <script>
-        $(".data-attributes span").peity("donut")
-        new PerfectScrollbar(".user-list")
-    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 	@await RenderSectionAsync("Styles", required: false)

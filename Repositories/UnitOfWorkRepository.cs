@@ -8,14 +8,17 @@ namespace Sih3.Repositories
     {
         public UnitOfWorkRepository(
             IReadingRepository readingRepository,
+            IArticleRepository articleRepository,
             IUserRepository userRepository
         )
         {
             Readings = readingRepository;
             User = userRepository;
+            Article = articleRepository;
         }
 
         public IReadingRepository Readings { get; set; }
-        public IUserRepository User { get; set;}
+        public IUserRepository User { get; set; }
+        public IArticleRepository Article { get; }
     }
 }
